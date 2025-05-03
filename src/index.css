@@ -1,13 +1,171 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+ body {
+  background-image: url('https://img.freepik.com/free-photo/ursa-major-ursa-minor-constellations_23-2150028893.jpg?t=st=1746038613~exp=1746042213~hmac=0a8ed8a31dcd4d02a56173a00c3f7f7a35a207330562698f38b31dedfdefd48e&w=996');
+  background-attachment: fixed;
+  height: 110vh;
+  margin: 0 auto;
+  width: 1360px;
+
+  font-family: sans-serif;
+}
+.container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 100vh;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%); 
+  }
+  100% {
+    transform: translateX(0); 
+  }
 }
+
+.planet_info {
+  height: 400px;
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.459);
+  color: white; 
+  padding: 20px; 
+  border-radius: 50px; 
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.5);
+  animation: slideIn 0.5s ease forwards; 
+}
+h2 {
+  font-size: 30px;
+  letter-spacing: 2px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h2 svg {
+  width: 40px;
+  height: 40px;
+  animation: rotate 2s linear infinite; 
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+p {
+  color: white;
+  letter-spacing: 1px;
+  line-height: 1.6; 
+}
+
+
+:root {
+  --system-size: min(90vw, 90vh);
+  --central-planet-size: calc(var(--system-size) * 0.12);
+  --orbit-radius: calc(var(--system-size) * 0.4);
+}
+h1{
+  color: aliceblue;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes scale {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+
+  }
+}
+
+.solar-system {
+  position: relative;
+  border: solid white 0.6px;
+  width: 70vh;
+  height: 70vh;
+  margin: 5vh auto;
+  background: rgba(0, 0, 0, 0.562);
+  border-radius: 50%;
+  transition: 2s;
+  transform: rotate(10deg);
+  animation: fadeIn 2s forwards; 
+
+  img {
+    width: 100px;
+    height: 100px;
+    background-color: transparent;
+
+  }
+}
+
+
+@keyframes shadowPulse {
+  0% {
+    filter: drop-shadow(0 0 calc(var(--central-planet-size) * 0.4) rgba(255, 174, 53, 0.637));
+  }
+  50% {
+    filter: drop-shadow(0 0 calc(var(--central-planet-size) * 0.5) rgba(255, 174, 53, 0.8));
+  }
+  100% {
+    filter: drop-shadow(0 0 calc(var(--central-planet-size) * 0.3) rgba(255, 174, 53, 0.637));
+  }
+}
+
+.central-planet {
+  min-width: 200px;
+  min-height: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  animation: 
+    shadowPulse 3s ease-in-out infinite;
+}
+
+
+
+.orbiting-planet {
+  position: absolute;
+  object-fit: cover;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) 
+             rotate(calc(var(--planet-index) * 45deg))
+             translateX(var(--orbit-radius));
+  animation: infinite-rotate 10s linear infinite;
+  
+  filter: drop-shadow(0 4px 15px rgba(255, 255, 255, 0.5)) ;
+}
+
+ @keyframes infinite-rotate {
+  from {
+    transform: translate(-50%, -50%) 
+             rotate(calc(var(--planet-index) * 45deg))
+             translateX(var(--orbit-radius)) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) 
+             rotate(calc(var(--planet-index) * 45deg))
+             translateX(var(--orbit-radius)) rotate(360deg);
+  }
+}
+
